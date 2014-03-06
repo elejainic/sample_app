@@ -10,9 +10,14 @@ describe "Static pages" do
 			page.should have_selector('h1', :content => "Kedada")
         end
 
-        it "should have the right title" do
+        it "should have the base title" do
         	visit '/static_pages/home'
-        	page.should have_selector('title', :content => 'Kedada | Pagina principal')
+        	page.should have_selector('title', :content => 'Kedada')
+        end
+
+        it "should not have a costum page title" do
+        	visit '/static_pages/home'
+        	page.should_not have_selector('title', :content => "| Pagina principal")
         end
          	
 
