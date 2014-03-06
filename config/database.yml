@@ -41,9 +41,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: sample_app_test
+  database: 
   pool: 5
-  username: sample_app
+  username: 
   password:
 
 production:

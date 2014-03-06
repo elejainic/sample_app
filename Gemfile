@@ -29,12 +29,14 @@ group :assets do
 end
 
 group :test do
-  gem 'capybara', '1.1.2'
+  gem "webrat"
+  gem 'capybara', '~>2.2.0.beta'
   gem 'factory_girl_rails', '4.1.0'
   gem "cucumber-rails", "~> 1.4.0", :require => false
   gem 'database_cleaner', '0.7.0'
   gem "multitest", "~> 0.2.0"
   gem 'rspec-rails', '~> 3.0.0.beta'
+  gem "test-unit", "~> 2.5.5"
   # gem 'launchy', '2.1.0'
   # gem 'rb-fsevent', '0.9.1', :require => false
   # gem 'growl', '1.0.3'
