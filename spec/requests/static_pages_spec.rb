@@ -2,71 +2,53 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+    subject { page }
+
 	describe "Pagina principal" do
+        before { visit root_path}
 
-		it "should have the content 'Kedada'" do
-
-			visit '/static_pages/home'
-			page.should have_selector('h1', :content => "Kedada")
-        end
-
-        it "should have the base title" do
-        	visit '/static_pages/home'
-        	page.should have_selector('title', :content => 'Kedada')
-        end
-
-        it "should not have a costum page title" do
-        	visit '/static_pages/home'
-        	page.should_not have_selector('title', :content => "| Pagina principal")
-        end
-         	
-
+		it {should have_selector('h1', content: 'Kedada')}
+        it {should have_selector('title', content: full_title(''))}
+        it {should_not have_selector('title', content: "| Pagina principal")}
     end
 
     describe "Pagina de ayuda" do
+        before { visit help_path }
 
-		it "should have the content 'Ayuda'" do
-
-			visit '/static_pages/help'
-			page.should have_selector('h1', :content => 'Ayuda')
-        end
-
-        it "should have the right title" do
-        	visit '/static_pages/help'
-        	page.should have_selector('title',
-        		             :content => 'Kedada | Ayuda')
-        end
+		it {should have_selector('h1', content: 'Ayuda')}
+        it {should have_selector('title', content: full_title('Ayuda'))}
+        
         
     end
 
     describe "Pagina de informacion" do
+        before { visit about_path }
 
-		it "should have the content 'Sobre nosotros'" do
+		it {should have_selector('h1', content: 'Sobre nosotros')}
 
-			visit '/static_pages/about'
-			page.should have_selector('h1', :content => 'Sobre nosotros')
-        end
-
-        it "should have the right title" do
-        	visit '/static_pages/about'
-        	page.should have_selector('title',
-        		             :content => 'Kedada | Sobre nosotros')
-        end
+        it {should have_selector('title', content: full_title('Sobre nosotros'))}
+        
     end
 
     describe "Pagina de contacto" do
+        before { visit contact_path }
 
-		it "should have the h1 'Contacta'" do
+		it {should have_selector('h1', content: 'Contacta')}
 
-			visit '/static_pages/contact'
-			page.should have_selector('h1', :content => 'Contacta')
-        end
+        it {should have_selector('title', content: full_title('Contacta'))}
+    end
 
-        it "should have the right title" do
-        	visit '/static_pages/contact'
-        	page.should have_selector('title',
-        		             :content => 'Kedada | Contacta')
-        end
+    it "should have the right links on the layout" do
+        visit root_path
+        click_link "Sobre nosotros"
+        page.should have_selector 'title', content: full_title('Sobre nosotros')
+        click_link "Ayuda"
+        page.should have_selector 'title', content: full_title('Ayuda')
+        click_link "Contacto"
+        page.should have_selector 'title', content: full_title('Contacta')
+        click_link "Pagina principal"
+        click_link "Apuntate ahora!"
+        page.should have_selector 'title', content: full_title('Apuntate')
     end
 
 
