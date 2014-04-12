@@ -40,6 +40,8 @@ describe "Static pages" do
 
     it "should have the right links on the layout" do
         visit root_path
+        click_link "Entra"
+        page.should have_selector 'title', content: full_title('Entra')
         click_link "Sobre nosotros"
         page.should have_selector 'title', content: full_title('Sobre nosotros')
         click_link "Ayuda"
